@@ -1,0 +1,6 @@
+framework module Pods_Niyo_Mart_Niyo_MartUITests {
+  umbrella header "Pods-Niyo Mart-Niyo MartUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

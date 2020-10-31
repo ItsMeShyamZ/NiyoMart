@@ -1,0 +1,60 @@
+PODS:
+  - IQKeyboardManagerSwift (6.5.5)
+  - JVFloatLabeledTextField (1.2.2)
+  - MBProgressHUD (1.2.0)
+  - OTPFieldView (1.0.1)
+  - PINCache (3.0.2):
+    - PINCache/Arc-exception-safe (= 3.0.2)
+    - PINCache/Core (= 3.0.2)
+  - PINCache/Arc-exception-safe (3.0.2):
+    - PINCache/Core
+  - PINCache/Core (3.0.2):
+    - PINOperation (~> 1.2.0)
+  - PINOperation (1.2)
+  - PINRemoteImage (3.0.1):
+    - PINRemoteImage/PINCache (= 3.0.1)
+  - PINRemoteImage/Core (3.0.1):
+    - PINOperation
+  - PINRemoteImage/PINCache (3.0.1):
+    - PINCache (~> 3.0.1)
+    - PINRemoteImage/Core
+  - SDWebImage (5.5.2):
+    - SDWebImage/Core (= 5.5.2)
+  - SDWebImage/Core (5.5.2)
+  - Toast-Swift (5.0.1)
+
+DEPENDENCIES:
+  - IQKeyboardManagerSwift
+  - JVFloatLabeledTextField
+  - MBProgressHUD (~> 1.2.0)
+  - OTPFieldView
+  - PINRemoteImage
+  - SDWebImage
+  - Toast-Swift (~> 5.0.1)
+
+SPEC REPOS:
+  trunk:
+    - IQKeyboardManagerSwift
+    - JVFloatLabeledTextField
+    - MBProgressHUD
+    - OTPFieldView
+    - PINCache
+    - PINOperation
+    - PINRemoteImage
+    - SDWebImage
+    - Toast-Swift
+
+SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
+  JVFloatLabeledTextField: df48598472ee015701d509f43e59492a0d4ca208
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  OTPFieldView: 700a752fe62c41d1c4914c78aa500fb30d97c255
+  PINCache: bea7c404c360f6fe0f6ee783c5cd14e778fa2aab
+  PINOperation: 3a967a927e7867e61976c6cc23e5770416449fbc
+  PINRemoteImage: 3b7cedb118c2d357f87e9eabc7c81ba0202cb236
+  SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+
+PODFILE CHECKSUM: 60520da60fb9dba4b06be079081b5ff9fdd4ecdd
+
+COCOAPODS: 1.9.1

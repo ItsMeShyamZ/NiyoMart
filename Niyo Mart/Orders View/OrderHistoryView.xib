@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderHistoryView" customModule="Niyo_Mart" customModuleProvider="target">
+            <connections>
+                <outlet property="headerTitleLabel" destination="7bZ-DZ-2SR" id="Abl-bX-sBu"/>
+                <outlet property="historyTableView" destination="HLa-hz-yHL" id="FMT-hR-uhY"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aU2-yz-qVe">
+                    <rect key="frame" x="0.0" y="44" width="414" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2q-UD-RDU">
+                            <rect key="frame" x="10" y="10" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="JhR-s7-mRr"/>
+                            </constraints>
+                            <color key="tintColor" name="appColor"/>
+                            <state key="normal" image="back"/>
+                            <connections>
+                                <action selector="backButtonTpd:" destination="-1" eventType="touchUpInside" id="rwH-NY-G3e"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bZ-DZ-2SR">
+                            <rect key="frame" x="60" y="10" width="294" height="40"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                            <color key="textColor" name="appColor"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="x2q-UD-RDU" firstAttribute="leading" secondItem="aU2-yz-qVe" secondAttribute="leading" constant="10" id="UKg-GZ-ah5"/>
+                        <constraint firstAttribute="bottom" secondItem="x2q-UD-RDU" secondAttribute="bottom" constant="10" id="UYz-P2-zgG"/>
+                        <constraint firstItem="x2q-UD-RDU" firstAttribute="top" secondItem="aU2-yz-qVe" secondAttribute="top" constant="10" id="c35-Sq-vyv"/>
+                        <constraint firstAttribute="trailing" secondItem="7bZ-DZ-2SR" secondAttribute="trailing" constant="60" id="cDj-FW-69c"/>
+                        <constraint firstItem="7bZ-DZ-2SR" firstAttribute="top" secondItem="aU2-yz-qVe" secondAttribute="top" constant="10" id="ktG-Pf-OfU"/>
+                        <constraint firstItem="7bZ-DZ-2SR" firstAttribute="leading" secondItem="x2q-UD-RDU" secondAttribute="trailing" constant="10" id="mMX-Cz-rhw"/>
+                        <constraint firstAttribute="bottom" secondItem="7bZ-DZ-2SR" secondAttribute="bottom" constant="10" id="rpD-o7-fUe"/>
+                        <constraint firstAttribute="height" constant="60" id="znv-X7-FiI"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HLa-hz-yHL">
+                    <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                    <color key="backgroundColor" name="bgViewColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="cIU-Yx-QlJ"/>
+                        <outlet property="delegate" destination="-1" id="Gfb-14-M1g"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" name="bgViewColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="HLa-hz-yHL" secondAttribute="bottom" id="5IZ-aE-T67"/>
+                <constraint firstItem="HLa-hz-yHL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5z6-jE-9ic"/>
+                <constraint firstItem="aU2-yz-qVe" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="8wQ-Bh-p2L"/>
+                <constraint firstItem="aU2-yz-qVe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="asO-f7-yNc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aU2-yz-qVe" secondAttribute="trailing" id="g1n-oN-SCu"/>
+                <constraint firstItem="HLa-hz-yHL" firstAttribute="top" secondItem="aU2-yz-qVe" secondAttribute="bottom" id="iGB-7t-Ps9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HLa-hz-yHL" secondAttribute="trailing" id="qlm-gx-bVo"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="133" y="121"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back" width="30" height="30"/>
+        <namedColor name="appColor">
+            <color red="0.18799999356269836" green="0.32899999618530273" blue="0.093999996781349182" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="bgViewColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
