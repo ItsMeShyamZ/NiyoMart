@@ -574,7 +574,7 @@ class ApiManager: NSObject {
         //        Request Method: GET
         //        Content-Type: application/json
         
-        if let userApi = URL(string: "http://www.niyomart.com/api/category)") {
+        if let userApi = URL(string: "http://www.niyomart.com/api/category") {
             var request = URLRequest(url: userApi)
             request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -599,4 +599,63 @@ class ApiManager: NSObject {
         }
     }
     
+    
+    func fetchSubCategory(categoryid : String ,completionHandler : @escaping(_ userAddressData : [CategoryModel], _ erroeMsg : String) -> Void) -> Void {
+        //        API : http://www.niyomart.com/api/category/1/sub
+        //        Request Method: GET
+        //        Content-Type: application/json
+        
+        if let userApi = URL(string: "http://www.niyomart.com/api/category/\(categoryid)/sub") {
+            var request = URLRequest(url: userApi)
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            print("userApi : \(userApi)")
+            URLSession.shared.dataTask(with: request) { (jsonData, jsonResponse, jsonErrorStatus) in
+                guard let urlData = jsonData else {
+                    return
+                }
+                print("jsonData : \(jsonData) \(jsonResponse)")
+                do {
+                    let userAddressData = try JSONDecoder().decode([CategoryModel].self, from: urlData)
+                    completionHandler(userAddressData, "")
+                    print("fetchCategory : \(userAddressData)")
+                }catch let error as NSError {
+                    completionHandler([], "\(error.localizedDescription)")
+                    print("fetchCategory Api- \(error.localizedDescription)")
+                }
+            }.resume()
+        }else {
+            completionHandler([], "")
+        }
+    }
+    func fetchProduct(categoryid : String ,completionHandler : @escaping(_ userAddressData : [ProductModel], _ erroeMsg : String) -> Void) -> Void {
+        //        API : http://www.niyomart.com/api/category/1/sub
+        //        Request Method: GET
+        //        Content-Type: application/json
+        
+        if let userApi = URL(string: "http://www.niyomart.com/api/category/\(categoryid)/products") {
+            var request = URLRequest(url: userApi)
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            print("userApi : \(userApi)")
+            URLSession.shared.dataTask(with: request) { (jsonData, jsonResponse, jsonErrorStatus) in
+                guard let urlData = jsonData else {
+                    return
+                }
+                print("jsonData : \(jsonData) \(jsonResponse)")
+                do {
+                    let userAddressData = try JSONDecoder().decode([ProductModel].self, from: urlData)
+                    completionHandler(userAddressData, "")
+                    print("fetchCategory : \(userAddressData)")
+                }catch let error as NSError {
+                    completionHandler([], "\(error.localizedDescription)")
+                    print("fetchCategory Api- \(error.localizedDescription)")
+                }
+            }.resume()
+        }else {
+            completionHandler([], "")
+        }
+    }
 }

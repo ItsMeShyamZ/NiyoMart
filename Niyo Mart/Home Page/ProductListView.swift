@@ -16,7 +16,8 @@ class ProductListView: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var productTableView: UITableView!
     
-    
+    var category : CategoryModel?
+    var ProductList : [ProductModel] = []
     
     @IBAction func backButtonTpd(_ sender: Any) {
         self.navigationController?.popViewController(animated: false)
@@ -24,6 +25,11 @@ class ProductListView: UIViewController {
     
     @IBAction func searchButtonTpd(_ sender: Any) {
     
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadDataFromApi()
     }
     
     override func viewDidLoad() {
@@ -36,12 +42,12 @@ class ProductListView: UIViewController {
 
 extension ProductListView : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.ProductList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : ProductCell = productTableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as! ProductCell
-        
+        cell.setupDate(data: self.ProductList[indexPath.row])
         if indexPath.row == 2 {
             cell.addButton.isHidden = true
             cell.qtyView.isHidden = false
@@ -56,4 +62,25 @@ extension ProductListView : UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+extension ProductListView{
+    func loadDataFromApi() -> Void {
+        headerTitleLabel.font = UtilCollections.shared.getHeaderTitleFont()
+        showLoader(withTitle: "", and: "")
+        ApiManager.shared.fetchProduct(categoryid:"\(1/*self.category?.category_id ?? 0*/)") { (productlist, errorMsg) in
+            if errorMsg == "" {
+                self.ProductList = productlist
+                DispatchQueue.main.async {
+                    self.hideLoader()
+                    self.productTableView.reloadData()
+                }
+            }else {
+                DispatchQueue.main.async {
+                    self.hideLoader()
+                    self.showToast(message: errorMsg)
+                }
+            }
+        }
+        
+    }
 }

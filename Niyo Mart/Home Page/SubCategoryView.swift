@@ -18,7 +18,9 @@ class SubCategoryView: UIViewController {
     @IBOutlet weak var catTabBar: UITabBar!
     @IBOutlet weak var homeTabBarItem: UITabBarItem!
     
+    var category : CategoryModel?
     private let spacing:CGFloat = 1.0
+    var SubCategoryList : [CategoryModel] = []
     
     @IBAction func backButtonTpd(_ sender: Any) {
         self.navigationController?.popViewController(animated: false)
@@ -27,6 +29,11 @@ class SubCategoryView: UIViewController {
     
     @IBAction func searchButtonTpd(_ sender: Any) {
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadDataFromApi()
     }
     
     
@@ -78,7 +85,7 @@ extension SubCategoryView : UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfItemsPerRow:CGFloat = 3
-        let spacingBetweenCells:CGFloat = 1
+        let spacingBetweenCells:CGFloat = 2
         
         let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells)
         
@@ -91,13 +98,13 @@ extension SubCategoryView : UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return self.SubCategoryList.count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell : MenuCell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! MenuCell
-        cell.imgView.image = UIImage(named: "niyoMart1024.png")
+        cell.imgView.setURLImage(self.SubCategoryList[indexPath.row].category_image ?? "")
         
         return cell
     }
@@ -105,8 +112,31 @@ extension SubCategoryView : UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let view = ProductListView.init(nibName: "ProductListView", bundle: nil)
+        view.category = self.SubCategoryList[indexPath.row]
         self.navigationController?.pushViewController(view, animated: false)
         
     }
     
+}
+
+extension SubCategoryView{
+    func loadDataFromApi() -> Void {
+        headerTitleLabel.font = UtilCollections.shared.getHeaderTitleFont()
+        showLoader(withTitle: "", and: "")
+        ApiManager.shared.fetchSubCategory(categoryid:"\(self.category?.category_id ?? 0)") { (categoryList, errorMsg) in
+            if errorMsg == "" {
+                self.SubCategoryList = categoryList
+                DispatchQueue.main.async {
+                    self.hideLoader()
+                    self.categoryCollectionView.reloadData()
+                }
+            }else {
+                DispatchQueue.main.async {
+                    self.hideLoader()
+                    self.showToast(message: errorMsg)
+                }
+            }
+        }
+        
+    }
 }

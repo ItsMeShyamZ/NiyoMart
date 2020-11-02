@@ -111,19 +111,20 @@ extension HomePageView : UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArray.count
+        return self.categoryList.count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell : MenuCell = menuCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! MenuCell
-        cell.imgView.image = imageArray[indexPath.row]
+        cell.imgView.setURLImage(self.categoryList[indexPath.row].category_image ?? "")
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         menuCollectionView.deselectItem(at: indexPath, animated: false)
         let view = SubCategoryView.init(nibName: "SubCategoryView", bundle: nil)
+        view.category = self.categoryList[indexPath.row]
         self.navigationController?.pushViewController(view, animated: false)
     }
     
@@ -161,7 +162,7 @@ extension HomePageView : UICollectionViewDelegate, UICollectionViewDataSource, U
 
 extension HomePageView{
     func getCategoryList(){
-        let resource = Resource<CategoryModel>(vc: self, url: Api.category.categoryList, method: .get ,params : nil)
+        let resource = Resource<[CategoryModel]>(vc: self, url: Api.category.categoryList, method: .get ,params : nil)
         
         WebService.shared.loadData(resource: resource,withAppURL: .settingurl) { (result , statusCode)  in
             self.hideLoader()

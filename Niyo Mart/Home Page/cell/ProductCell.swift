@@ -53,4 +53,19 @@ class ProductCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupDate(data : ProductModel){
+        self.nameLabel.text = data.product_name ?? ""
+        self.productImageView.setURLImage(data.product_images?[0].product_image ?? "")
+        self.companyLabel.text = data.product_detail ?? ""
+        self.mrpLabel.text = data.product_final_price ?? ""
+        if !(data.product_discount ?? "").isEmpty{
+            self.offerView.isHidden = false
+        }else{
+            self.offerView.isHidden = true
+        }
+        self.offerlabel.text = (data.product_discount ?? "")+"%"
+        self.offtitleLabel.text = ""
+        self.priceLabel.text = data.product_actual_price ?? ""
+    }
+    
 }

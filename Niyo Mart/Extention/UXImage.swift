@@ -221,7 +221,7 @@ extension UIImageView{
     
     func setURLImage(_ url : String){
         if !url.isEmpty{
-        self.pin_setImage(from: URL(string: url)!)
+        self.pin_setImage(from: URL(string: url) ?? URL(string: ""))
         }
     }
     
